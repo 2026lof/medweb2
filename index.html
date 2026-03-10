@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kimball Medical Center</title>
+  <style>
+    :root {
+      --bg: #f6fbff;
+      --card: #ffffff;
+      --text: #163047;
+      --muted: #5f7488;
+      --primary: #1b6ca8;
+      --primary-dark: #14527f;
+      --accent: #dff2ff;
+      --border: #d7e4ef;
+      --shadow: 0 18px 45px rgba(18, 64, 99, 0.12);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef7fd 0%, #ffffff 32%, #f7fbfe 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: #11324a;
+      color: #eaf6ff;
+      font-size: 14px;
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(215, 228, 239, 0.75);
+    }
+
+     .logonew {
+      max-width: 180px;
+      height: auto;
+      display: block;
+    } 
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), #55a9df);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover { background: var(--primary-dark); }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .hero {
+      padding: 72px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .service-card,
+    .doctor-card,
+    .info-card,
+    .contact-card,
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 46px;
+      background:
+        radial-gradient(circle at top right, rgba(27,108,168,0.14), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      background: var(--accent);
+      color: var(--primary-dark);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 { margin: 0 0 14px; line-height: 1.15; }
+    h1 { font-size: clamp(34px, 5vw, 56px); }
+    h2 { font-size: clamp(28px, 4vw, 38px); }
+    h3 { font-size: 22px; }
+
+    p { margin: 0 0 16px; color: var(--muted); }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .hero-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, #ffffff 0%, #eef8ff 100%);
+    }
+
+    .photo-panel {
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 280px;
+      background: linear-gradient(135deg, #ccecff, #e9f6ff);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: #326180;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mini-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+
+    section { padding: 34px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .services-grid,
+    .doctors-grid,
+    .info-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+    .doctors-grid { grid-template-columns: repeat(3, 1fr); }
+    .info-grid { grid-template-columns: 1.1fr 0.9fr; }
+
+    .service-card,
+    .doctor-card,
+    .info-card,
+    .contact-card,
+    .form-card {
+      padding: 24px;
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: var(--primary-dark);
+      font-size: 26px;
+      margin-bottom: 16px;
+    }
+
+    .doctor-role {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .doctor-photo {
+      height: 190px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #d6eefc, #eef9ff);
+      margin-bottom: 18px;
+      display: grid;
+      place-items: center;
+      color: #447391;
+      font-weight: 700;
+    }
+
+    .appointment-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fbfdff;
+    }
+
+    .hours {
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      padding-top: 18px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 8px 0;
+      color: var(--muted);
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(27,108,168,0.12);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .disclaimer {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    footer {
+      padding: 30px 0 48px;
+      color: var(--muted);
+    }
+
+    .footer-card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .services-grid,
+      .doctors-grid,
+      .info-grid,
+      .appointment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-card { padding: 28px; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { flex-direction: column; align-items: flex-start; }
+      .hero-stats,
+      .field-row { grid-template-columns: 1fr; }
+      .topbar-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div>Compassionate primary care for families, adults, and seniors</div>
+      <div>Call us: (632) 504-4531 · Same-day appointments available</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">
+        <img src="images/KMCLogo.png" alt="Logo" class="logonew">
+        <!--<img src="images/LogoAAC.png" alt="Logo">-->
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#providers">Providers</a>
+        <a href="#about">About</a>
+        <a href="#appointments">Appointments</a>
+      </nav>
+      <a href="#appointments" class="btn btn-primary">Book Visit</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Modern care · Warm experience · Easy scheduling</span>
+          <h1>Medical care designed for busy families and working professionals.</h1>
+          <p>
+            Welcome to Kimball Medical Center — a clean, modern clinic layout for primary care,
+            internal medicine, wellness visits, follow-ups, and preventive screenings.
+          </p>
+          <div class="hero-actions">
+            <a href="#appointments" class="btn btn-primary">Request Appointment</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>15+</strong>
+              <span>Years serving patients</span>
+            </div>
+            <div class="stat">
+              <strong>4.9★</strong>
+              <span>Average patient rating</span>
+            </div>
+            <div class="stat">
+              <strong>7 days</strong>
+              <span>Open Monday to Sunday</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div>
+            <!--<div class="photo-panel">Replace this panel with your clinic image, doctor photo, or treatment room image.</div>-->
+            <div class="mini-grid">
+              <div class="mini-card">
+                <strong>New Patient Visits</strong>
+                <p>Health history review, exam, and care plan.</p>
+              </div>
+              <div class="mini-card">
+                <strong>Telehealth</strong>
+                <p>Convenient virtual follow-ups when appropriate.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Services</span>
+            <h2>Care options built around everyday health needs</h2>
+          </div>
+        </div>
+        <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">👶</div>
+          <h3>Pediatric Care</h3>
+          <p>Provide compassionate pediatric care, supporting the health and development of infants, children, and adolescents through every stage of growth.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">❤️</div>
+          <h3>Cardiology</h3>
+          <p>Heart health evaluations, ECG testing, blood pressure management, and cardiovascular disease prevention.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💉</div>
+          <h3>Vaccinations</h3>
+          <p>Complete immunization services for children and adults, including flu shots and travel vaccinations.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔬</div>
+          <h3>Home Visits</h3>
+          <p>We provide reliable home care services, delivering personalized medical support and assistance to patients in the comfort of their own homes.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💻</div>
+          <h3>Telemedicine</h3>
+          <p>We offer telemedicine services, allowing patients to consult with healthcare providers remotely through secure video or phone visits for convenient and timely care.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏥</div>
+          <h3>Urgent Care</h3>
+          <p>Same-day appointments for non-emergency medical issues that require prompt attention.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📋</div>
+          <h3>Health Evaluations</h3>
+          <p>Comprehensive health evaluations to assess overall wellness, identify potential health concerns, and guide patients toward effective treatment and preventive care.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🤰</div>
+          <h3>Women's Care</h3>
+          <p>Complete women's healthcare including Pap smears, breast exams, menopause management, and family planning.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🍼</div>
+          <h3>Newborn Care</h3>
+          <p>Specialized care for newborns, including check-ups, vaccinations, and developmental assessments.</p>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!--<section id="providers">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Providers</span>
+            <h2>Meet your care team</h2>
+          </div>
+        </div>
+        <div class="doctors-grid">
+          <article class="doctor-card">
+            <div class="doctor-photo">Doctor Photo</div>
+            <div class="doctor-role">Medical Director</div>
+            <h3>Dr. Sophia Carter, MD</h3>
+            <p>Focused on patient education, long-term care planning, and building trusted relationships.</p>
+          </article>
+          <article class="doctor-card">
+            <div class="doctor-photo">Nurse Practitioner</div>
+            <div class="doctor-role">Family Medicine</div>
+            <h3>James Patel, NP</h3>
+            <p>Specializes in preventive care, follow-up visits, and helping patients navigate treatment steps.</p>
+          </article>
+          <article class="doctor-card">
+            <div class="doctor-photo">Care Coordinator</div>
+            <div class="doctor-role">Patient Support</div>
+            <h3>Maria Lopez</h3>
+            <p>Helps patients with scheduling, intake details, and a smooth office experience from start to finish.</p>
+          </article>
+        </div>
+      </div>
+    </section>-->
+
+    <section id="about">
+      <div class="container info-grid">
+        <div class="info-card">
+          <span class="eyebrow">Why patients choose us</span>
+          <h2>A calmer, more personal medical office experience</h2>
+          <div class="contact-list">
+            <div class="contact-item"><strong>Easy intake</strong><br />Patients can request appointments online any time.</div>
+            <div class="contact-item"><strong>Trusted clinicians</strong><br />Highlight credentials, bedside manner, and specialties.</div>
+            <div class="contact-item"><strong>Convenient scheduling</strong><br />Add office hours, urgent visit notes, and callback expectations.</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <span class="eyebrow">Office details</span>
+          <h3>Visit or call us</h3>
+          <div class="contact-list">
+            <div class="contact-item"><strong>Address</strong><br />St. 354 Kimball Ave<br />Yonkers, NY 10704</div>
+            <div class="contact-item"><strong>Phone</strong><br />(631) 215-9567</div>
+            <div class="contact-item"><strong>Email</strong><br />kimballmedcenter@gmail.com</div>
+          </div>
+          <div class="hours">
+            <div class="hours-row"><span>Monday – Friday</span><span>7:30 AM – 8:00 PM</span></div>
+            <div class="hours-row"><span>Saturday – Sunday</span><span>9:00 AM – 6:00 PM</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="appointments">
+      <div class="container appointment-grid">
+        <div class="contact-card">
+          <span class="eyebrow">Appointment requests</span>
+          <h2>Request a visit online</h2>
+          <p>
+            Patients can submit a request here and your Formspree inbox will receive the details.
+            Replace the form action URL below with your own Formspree endpoint.
+          </p>
+          <div class="contact-list">
+            <div class="contact-item"><strong>Good for:</strong><br />new patient requests, callbacks, wellness visits, follow-ups</div>
+            <div class="contact-item"><strong>Response time:</strong><br />example text: “We respond within 1 business day.”</div>
+            <div class="contact-item"><strong>Urgent issues:</strong><br />example text: “Call 911 or go to the nearest ER for emergencies.”</div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Appointment</h3>
+          <form action="https://formspree.io/f/mlgpjpjv" method="POST">
+            <div class="field-row">
+              <div>
+                <label for="name">Full Name</label>
+                <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+              </div>
+              <div>
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" required />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div>
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email" placeholder="jane@example.com" required />
+              </div>
+              <div>
+                <label for="visitType">Visit Type</label>
+                <select id="visitType" name="visit_type" required>
+                  <option value="">Select a visit type</option>
+                  <option>New Patient</option>
+                  <option>Follow-Up</option>
+                  <option>Annual Physical</option>
+                  <option>Telehealth</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div>
+                <label for="preferredDate">Preferred Date</label>
+                <input id="preferredDate" name="preferred_date" type="date" />
+              </div>
+              <div>
+                <label for="preferredTime">Preferred Time</label>
+                <select id="preferredTime" name="preferred_time">
+                  <option value="">Select a time range</option>
+                  <option>Morning</option>
+                  <option>Afternoon</option>
+                  <option>Evening</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="message">Reason for Visit</label>
+              <textarea id="message" name="message" placeholder="Tell us briefly what you'd like help with"></textarea>
+            </div>
+
+            <input type="hidden" name="_subject" value="New appointment request from Harbor Medical Office website" />
+
+            <button class="btn btn-primary" type="submit">Send Appointment Request</button>
+            <p class="disclaimer">
+              This form is not for medical emergencies. For urgent or life-threatening concerns, call 911 or seek emergency care.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-card">
+      <div>
+        <strong>Kimball Medical Center</strong><br />
+      </div>
+      <div>© 2026 Kimball Medical Center. All rights reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
