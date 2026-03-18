@@ -508,9 +508,9 @@
           <p>Complete immunization services for children and adults, including flu shots and travel vaccinations.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">🔬</div>
-          <h3>Home Visits</h3>
-          <p>We provide reliable home care services, delivering personalized medical support and assistance to patients in the comfort of their own homes.</p>
+          <div class="service-icon">🩺</div>
+          <h3>Primary Care</h3>
+          <p>Deliver comprehensive primary care services, focusing on preventive health, routine check-ups, and personalized treatment to support overall well-being at every stage of life.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">💻</div>
@@ -584,80 +584,81 @@
           </div>
         </div>-->
 
-        <div class="contact-card">
-          <span class="eyebrow">Office details</span>
-          <div class="contact-list">
-            <div class="contact-item"><strong>Address</strong><br />St. 354 Kimball Ave<br />Yonkers, NY 10704</div>
-            <div class="contact-item"><strong>Phone</strong><br />(631) 215-9567</div>
-            <div class="contact-item"><strong>Email</strong><br />kimballmedcenter@gmail.com</div>
+        <div class="appointment-grid">
+          <div id="office" class="contact-card">
+            <span class="eyebrow">Office details</span>
+            <div class="contact-list">
+              <div class="contact-item"><strong>Address</strong><br />St. 354 Kimball Ave<br />Yonkers, NY 10704</div>
+              <div class="contact-item"><strong>Phone</strong><br />(631) 215-9567</div>
+              <div class="contact-item"><strong>Email</strong><br />kimballmedcenter@gmail.com</div>
+            </div>
+            <div class="hours">
+              <div class="hours-row"><span>Monday – Friday</span><span>7:30 AM – 8:00 PM</span></div>
+              <div class="hours-row"><span>Saturday – Sunday</span><span>9:00 AM – 6:00 PM</span></div>
+            </div>
           </div>
-          <div class="hours">
-            <div class="hours-row"><span>Monday – Friday</span><span>7:30 AM – 8:00 PM</span></div>
-            <div class="hours-row"><span>Saturday – Sunday</span><span>9:00 AM – 6:00 PM</span></div>
+
+          <div id="appointment" class="form-card">
+            <span class="eyebrow">Appointment</span>
+            <form action="https://formspree.io/f/mlgpjpjv" method="POST">
+              <div class="field-row">
+                <div>
+                  <label for="name">Full Name</label>
+                  <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+                </div>
+                <div>
+                  <label for="phone">Phone Number</label>
+                  <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" required />
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div>
+                  <label for="email">Email Address</label>
+                  <input id="email" name="email" type="email" placeholder="jane@example.com" required />
+                </div>
+                <div>
+                  <label for="visitType">Visit Type</label>
+                  <select id="visitType" name="visit_type" required>
+                    <option value="">Select a visit type</option>
+                    <option>New Patient</option>
+                    <option>Follow-Up</option>
+                    <option>Annual Physical</option>
+                    <option>Telehealth</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div>
+                  <label for="preferredDate">Preferred Date</label>
+                  <input id="preferredDate" name="preferred_date" type="date" />
+                </div>
+                <div>
+                  <label for="preferredTime">Preferred Time</label>
+                  <select id="preferredTime" name="preferred_time">
+                    <option value="">Select a time range</option>
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="message">Reason for Visit</label>
+                <textarea id="message" name="message" placeholder="Tell us briefly what you'd like help with"></textarea>
+              </div>
+
+              <input type="hidden" name="_subject" value="New appointment request from Harbor Medical Office website" />
+
+              <button class="btn btn-primary" type="submit">Send Appointment Request</button>
+              <p class="disclaimer">
+                This form is not for medical emergencies. For urgent or life-threatening concerns, call 911 or seek emergency care.
+              </p>
+            </form>
           </div>
-        </div>
-
-
-        <div class="form-card">
-          <span class="eyebrow">Appointment</span>
-          <form action="https://formspree.io/f/mlgpjpjv" method="POST">
-            <div class="field-row">
-              <div>
-                <label for="name">Full Name</label>
-                <input id="name" name="name" type="text" placeholder="Jane Doe" required />
-              </div>
-              <div>
-                <label for="phone">Phone Number</label>
-                <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" required />
-              </div>
-            </div>
-
-            <div class="field-row">
-              <div>
-                <label for="email">Email Address</label>
-                <input id="email" name="email" type="email" placeholder="jane@example.com" required />
-              </div>
-              <div>
-                <label for="visitType">Visit Type</label>
-                <select id="visitType" name="visit_type" required>
-                  <option value="">Select a visit type</option>
-                  <option>New Patient</option>
-                  <option>Follow-Up</option>
-                  <option>Annual Physical</option>
-                  <option>Telehealth</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="field-row">
-              <div>
-                <label for="preferredDate">Preferred Date</label>
-                <input id="preferredDate" name="preferred_date" type="date" />
-              </div>
-              <div>
-                <label for="preferredTime">Preferred Time</label>
-                <select id="preferredTime" name="preferred_time">
-                  <option value="">Select a time range</option>
-                  <option>Morning</option>
-                  <option>Afternoon</option>
-                  <option>Evening</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label for="message">Reason for Visit</label>
-              <textarea id="message" name="message" placeholder="Tell us briefly what you'd like help with"></textarea>
-            </div>
-
-            <input type="hidden" name="_subject" value="New appointment request from Harbor Medical Office website" />
-
-            <button class="btn btn-primary" type="submit">Send Appointment Request</button>
-            <p class="disclaimer">
-              This form is not for medical emergencies. For urgent or life-threatening concerns, call 911 or seek emergency care.
-            </p>
-          </form>
         </div>
 
       </div>
